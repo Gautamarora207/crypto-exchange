@@ -86,7 +86,7 @@ const showForm = (props) => {
           <table className="table table-dark table-sm small">
             <tbody>
                 <tr>
-                    <td>GT</td>
+                    <td>GC</td>
                     <td>{tokenBalance}</td>
                     <td>{exchangeTokenBalance}</td>
                 </tr>
@@ -99,7 +99,7 @@ const showForm = (props) => {
               <div className="col-12 col-sm pr-sm-2">
                   <input 
                   type = "text"
-                  placeholder = "GT Amount"
+                  placeholder = "GC Amount"
                   onChange = {(e) => dispatch( tokenDepositAmountChanged(e.target.value) ) }
                   className = "form-control form-control-sm bg-dark text-white"
                   required
@@ -151,7 +151,7 @@ const showForm = (props) => {
           <table className="table table-dark table-sm small">
             <tbody>
                 <tr>
-                    <td>GT</td>
+                    <td>GC</td>
                     <td>{tokenBalance}</td>
                     <td>{exchangeTokenBalance}</td>
                 </tr>
@@ -164,7 +164,7 @@ const showForm = (props) => {
               <div className="col-12 col-sm pr-sm-2">
                   <input 
                   type = "text"
-                  placeholder = "GT Amount"
+                  placeholder = "GC Amount"
                   onChange = {(e) => dispatch( tokenWithdrawAmountChanged(e.target.value) ) }
                   className = "form-control form-control-sm bg-dark text-white"
                   required
