@@ -27,11 +27,16 @@ import { ETHER_ADDRESS } from '../helpers'
 
 export const loadWeb3 = async (dispatch) => {
   if(typeof window.ethereum!=='undefined'){
+    await window.ethereum.enable();
     const web3 = new Web3(window.ethereum)
     dispatch(web3Loaded(web3))
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '0x4' }],
+    });
     return web3
   } else {
-    window.alert('Please install MetaMask')
+    window.alert('Please install MetaMask extension')
     window.location.assign("https://metamask.io/")
   }
 }
@@ -161,6 +166,7 @@ export const depositEther = (dispatch, exchange, web3, amount, account) => {
   exchange.methods.depositEther().send({ from: account,  value: web3.utils.toWei(amount, 'ether') })
   .on('transactionHash', (hash) => {
     dispatch(balancesLoading())
+    window.location.reload()
   })
   .on('error',(error) => {
     console.error(error)
@@ -172,6 +178,7 @@ export const withdrawEther = (dispatch, exchange, web3, amount, account) => {
   exchange.methods.withdrawEther(web3.utils.toWei(amount, 'ether')).send({ from: account })
   .on('transactionHash', (hash) => {
     dispatch(balancesLoading())
+    window.location.reload()
   })
   .on('error',(error) => {
     console.error(error)
@@ -187,6 +194,7 @@ export const depositToken = (dispatch, exchange, web3, token, amount, account) =
     exchange.methods.depositToken(token.options.address, amount).send({ from: account })
     .on('transactionHash', (hash) => {
       dispatch(balancesLoading())
+      window.location.reload()
     })
     .on('error',(error) => {
       console.error(error)
@@ -199,6 +207,7 @@ export const withdrawToken = (dispatch, exchange, web3, token, amount, account) 
   exchange.methods.withdrawToken(token.options.address, web3.utils.toWei(amount, 'ether')).send({ from: account })
   .on('transactionHash', (hash) => {
     dispatch(balancesLoading())
+    window.location.reload()
   })
   .on('error',(error) => {
     console.error(error)
